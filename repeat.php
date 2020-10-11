@@ -10,10 +10,11 @@ Class RepeatTask
      * @param array $initArray
      * @return void
      */
-    public function repeat(array $initArray = []) {
-        if(empty($initArray)) {
-            echo 'Array is empty.';
+    public function repeat(string $initStr='') {
+        if(empty($initStr)) {
+            echo 'Your input string is empty.';
         } else {
+            $initArray = explode(',', $initStr);
             $this->generateRepeatArray($initArray);
             print_r($this->repeatArray);
         }
@@ -33,6 +34,3 @@ Class RepeatTask
         }
     }
 };
-
-$tasks = new RepeatTask;
-$tasks->repeat([1,2,3]);

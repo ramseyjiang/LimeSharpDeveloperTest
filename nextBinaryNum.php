@@ -1,22 +1,18 @@
 <?php
 Class BinaryNumTask
 {
-    public $num1 = [1, 0];
-    public $num2 = [1, 1];
-    public $num3 = [1, 1, 0];
-    public $num4 = [1,0,0,0,0,0,0,0,0,1];
-    public $num5 = [1,1,1,0];
-    public $num6 = [1,0,0,1];
-    public $num7 = [1, 1, 1];
+    public function nextBinaryNum(string $initStr){
+        if($initStr!=0 && empty($initStr)) {
+            echo 'Your input string is empty.';
+        } else {
+            $binaryArray = explode(',', $initStr);
 
-    public function nextBinaryNum(){
-        $this->outputBinaryNum($this->num1);
-        $this->outputBinaryNum($this->num2);
-        $this->outputBinaryNum($this->num3);
-        $this->outputBinaryNum($this->num4);
-        $this->outputBinaryNum($this->num5);
-        $this->outputBinaryNum($this->num6);
-        $this->outputBinaryNum($this->num7);
+            if(!ctype_digit(implode('', $binaryArray))) {//It is used to check all elements are number or not. I know it is not only 0 and 1, but I think here is not the point for this task.
+                echo 'Your input includes something, not a binary number.';
+            } else {
+                $this->outputBinaryNum($binaryArray);
+            }
+        }
     }
 
     private function generateNextBinaryNum(array $num, int $loopTag=0){
@@ -37,8 +33,11 @@ Class BinaryNumTask
     private function normalNextBinary(array $num){
         $tag = 0;
         for($i=count($num)-1; $i>=0; $i--) {
-            if($num[$i] == 0 && $i == (count($num) - 1)){//For all binary which the last number is 0.
+            if($num[$i] == 0 && $i == (count($num) - 1)){//For all binary which the last number is 0. It also includes only input 0
                 $num[$i] = 1;
+            } elseif($num[$i] == 1 && count($num) == 1) {//For only input 1
+                $num[$i] = 1;
+                $num[$i+1] = 0;
             } else {
                 if( $num[$i] == 1 && ( $i == (count($num) - 1) || $tag == 1) ) {//For all binary which the last number is 1.
                     $tag = 1;
@@ -62,6 +61,3 @@ Class BinaryNumTask
         print_r($this->generateNextBinaryNum($num));
     }
 };
-
-$tasks = new BinaryNumTask;
-$tasks->nextBinaryNum();   

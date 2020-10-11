@@ -11,6 +11,3 @@ Class ReformatTask
         }
     }
 };
-
-$tasks = new ReformatTask;
-$tasks->reformat('liMeSHArp DeveLoper TEST');   //Here can be changed, then it can reformat any string from input.
